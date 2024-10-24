@@ -10,24 +10,10 @@ plugins {
     id 'application'
 }
 
-task createGeneratedSourcesDir() {
-    doLast {
-        file('generated-sources/MonteCarlo').mkdirs()
-    }
-}
-
 repositories {
+    // Use Maven Central for resolving dependencies.
     mavenCentral()
-    maven { url 'https://repo.zeroc.com/nexus/content/repositories/releases' }
 }
-
-// Slice compilation task
-task compileSlice(type: Exec) {
-    commandLine 'slice2java', 'src/main/resources/config.ice', '--output-dir', 'generated-sources'
-}
-
-// Ensure the directory is created before running the slice compiler
-compileSlice.dependsOn createGeneratedSourcesDir
 
 dependencies {
     // Use JUnit Jupiter for testing.
@@ -37,7 +23,6 @@ dependencies {
 
     // This dependency is used by the application.
     implementation libs.guava
-    implementation 'com.zeroc:ice:3.7.9'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -56,21 +41,3 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-
-tasks.withType(ProcessResources) {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', 'generated-sources']
-        }
-        resources {
-            srcDir 'src/main/resources'
-        }
-    }
-}
-
-compileJava.dependsOn compileSlice
