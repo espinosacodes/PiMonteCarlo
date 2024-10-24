@@ -10,11 +10,24 @@ plugins {
     id 'application'
 }
 
+task createGeneratedSourcesDir() {
+    doLast {
+        file('generated-sources/MonteCarlo').mkdirs()
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://repo.zeroc.com/nexus/content/repositories/releases' }
 }
 
+// Slice compilation task
+task compileSlice(type: Exec) {
+    commandLine 'slice2java', 'src/main/resources/config.ice', '--output-dir', 'generated-sources'
+}
+
+// Ensure the directory is created before running the slice compiler
+compileSlice.dependsOn createGeneratedSourcesDir
 
 dependencies {
     // Use JUnit Jupiter for testing.
@@ -44,7 +57,20 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-task compileSlice(type: Exec) {
-    commandLine 'slice2java', 'src/main/resources/config.ice'
+tasks.withType(ProcessResources) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'generated-sources']
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
 compileJava.dependsOn compileSlice
