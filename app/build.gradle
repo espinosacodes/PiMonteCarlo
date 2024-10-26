@@ -1,6 +1,13 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+}
+
+application {
+    mainClassName = 'montecarlo.MaestroServer'  // Change this to your actual main class
+}
+
+repositories {
+    mavenCentral()
 }
 
 task createGeneratedSourcesDir() {
@@ -53,6 +60,13 @@ tasks.named('test') {
 tasks.withType(ProcessResources) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+
+task runTrabajadorServer(type: JavaExec) {
+    mainClass = 'montecarlo.TrabajadorServer'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['--Ice.Config=trabajador1.config'] // Asegúrate de que esta línea esté presente
+}
+
 
 sourceSets {
     main {
