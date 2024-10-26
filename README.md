@@ -1,5 +1,9 @@
 # PiMonteCarlo
-
+Santiago Espinosa
+Juan Andrés Cano
+Samuel Chapaval
+Juan David Quintero
+Juan Esteban Gomez
 ## https://github.com/espinosacodes/PiMonteCarlo
 
 run on /PiMonteCarlo
