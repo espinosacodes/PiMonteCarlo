@@ -60,7 +60,7 @@ tasks.withType(ProcessResources) {
 task runTrabajadorServer(type: JavaExec) {
     mainClass = 'montecarlo.TrabajadorServer'
     classpath = sourceSets.main.runtimeClasspath
-    args = ['--Ice.Config=trabajador1.config'] // Asegúrate de que esta línea esté presente
+    args = ['--Ice.Config=src/main/resources/trabajador1.config'] // Adjust the path accordingly
 }
 
 
