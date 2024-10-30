@@ -4,21 +4,18 @@ public class Worker {
 
             com.zeroc.Ice.ObjectPrx base = communicator.stringToProxy("Master:default -p 10000");
             Demo.MasterPrx master = Demo.MasterPrx.checkedCast(base);
-            if (master == null) {
+            if(master == null) {
                 throw new Error("Invalid proxy");
             }
+            int response = master.receiveWorker(1);
+            System.out.println("Worker esperando en el puerto "+response);
+            String endPoints = "default -p "+response;
 
-            // Registrar el Worker en el Master
-            //ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("WorkerAdapter", "default");
-            //Demo.Worker worker = new WorkerI();
-            //Demo.WorkerPrx workerPrx = Demo.WorkerPrx.checkedCast(adapter.add(worker, Util.stringToIdentity("Worker" + System.currentTimeMillis())));
-            //adapter.activate();
-
-            // Registrar Worker en el Master
-            //master.registerWorker(workerPrx);
-            String response = master.sendNumber(1);
-            System.out.println(response);
-            // Esperar hasta que se cierre
+            com.zeroc.Ice.ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("WorkerAdapter", endPoints);
+            Demo.Worker workerObj = new WorkerI();
+            adapter.add(workerObj, com.zeroc.Ice.Util.stringToIdentity("Worker"));
+            adapter.activate();
+            System.out.println("Worker iniciado y esperando números...");
             communicator.waitForShutdown();
         }
     }

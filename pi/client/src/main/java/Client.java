@@ -19,6 +19,7 @@ public class Client
             // Enviar el número N al maestro y recibir la confirmación
             String response = master.sendNumber(N);
             System.out.println("Respuesta del maestro: " + response);
+            scanner.close();
         }
     }
 }
