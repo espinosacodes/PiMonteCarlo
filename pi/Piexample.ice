@@ -1,7 +1,5 @@
-module Demo
-{
-    interface Printer
-    {
-        void printString(string s);
+module Demo {
+    interface Printer {
+        string sendNumber(int N);
     }
 }
