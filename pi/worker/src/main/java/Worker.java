@@ -15,7 +15,8 @@ public class Worker {
             Demo.Worker workerObj = new WorkerI();
             adapter.add(workerObj, com.zeroc.Ice.Util.stringToIdentity("Worker"));
             adapter.activate();
-            System.out.println("Worker iniciado y esperando números...");
+            System.out.println("Worker iniciado y esperando numeros...");
+            System.out.println("------------------------------------------------------");
             communicator.waitForShutdown();
         }
     }

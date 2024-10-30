@@ -17,8 +17,9 @@ public class Client
             int N = scanner.nextInt();
 
             // Enviar el número N al maestro y recibir la confirmación
-            String response = master.sendNumber(N);
-            System.out.println("Respuesta del maestro: " + response);
+            master.distributeWork(N);
+            double piEstimate = master.getResult();
+            System.out.println("Estimacion de Pi: " + piEstimate);
             scanner.close();
         }
     }

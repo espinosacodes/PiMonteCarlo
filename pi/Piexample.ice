@@ -1,10 +1,11 @@
 module Demo {
     interface Master {
-        string sendNumber(int N);
+        string distributeWork(int N);
+        double getResult();
         int receiveWorker(int i);
     }
 
     interface Worker {
-        void receiveNumber(int N);
+        int calculatePointsInCircle(int pointsToGenerate);
     }
 }
