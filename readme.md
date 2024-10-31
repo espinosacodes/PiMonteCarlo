@@ -1,8 +1,12 @@
 Juan Andrés Cano
+
 Juan David Quintero
+
 Santiago Espinosa
+
 Samuel Chapaval 
-Juan Esteban Gonzalez 
+
+Juan Esteban Gomez
 
 
 # Compilar: 
