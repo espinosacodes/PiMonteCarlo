@@ -1,3 +1,10 @@
+Juan Andrés Cano
+Juan David Quintero
+Santiago Espinosa
+Samuel Chapaval 
+Juan Esteban Gonzalez 
+
+
 # Compilar: 
 ```bash
 .\gradlew clean build
